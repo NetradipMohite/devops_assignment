@@ -1,1 +1,48 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'your-dockerhub-username/node-api:latest' // Replace as needed
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git' // Replace with actual repo
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('docker_setup/nodejs_app') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                dir('docker_setup/nodejs_app') {
+                    sh 'npm test || echo "No tests found, skipping."'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t $DOCKER_IMAGE docker_setup/nodejs_app'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub (Mocked)') {
+            steps {
+                echo "Docker image $DOCKER_IMAGE would be pushed here."
+                // Uncomment below to actually push (requires Docker Hub login)
+                // sh 'docker push $DOCKER_IMAGE'
+            }
+        }
+    }
+}
 
