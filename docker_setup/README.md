@@ -2,7 +2,7 @@
 
 This folder contains the Docker setup for a simple Node.js backend and a React frontend, managed using Docker Compose.
 
----
+```
 docker_setup/
 ├── nodejs_app/
 │ └── Dockerfile
@@ -10,7 +10,7 @@ docker_setup/
 │ └── Dockerfile
 └── docker-compose.yml
 
----
+```
 
 ## How to Run
 
