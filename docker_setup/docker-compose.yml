@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  node-api:
+    build: ./nodejs_app
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    container_name: node_api_service
+
+  react-frontend:
+    build: ./react_app
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    container_name: react_frontend_service
